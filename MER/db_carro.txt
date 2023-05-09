@@ -14,13 +14,15 @@ peça(id, carro_designado, custo_unitario, quantidade)
 
 relacionamentos:
 
-cliente tem veiculo,
+reparação conserta veiculo,
 
-funcionario faz reparação,
+veiculo pertence cliente,
 
 reparação usa peça,
 
-funcionario pertence departamento,
+reparação feita funcionario,
+
+funcionario pertence departamento.
 
 
 
