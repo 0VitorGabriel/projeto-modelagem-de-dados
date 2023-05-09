@@ -1,6 +1,6 @@
 entidades:
 
-reparações(id_cliente, id_funcionario, id_veiculo, peças_utilizadas, preço_peça, tempo_gasto, preço_reparação, data)
+reparação(id_cliente, id_funcionario, id_veiculo, peças_utilizadas, preço_peça, tempo_gasto, preço_reparação, data)
 
 cliente(id, nome, rua, bairro, telefone, telefone_fixo), 
 
@@ -11,3 +11,16 @@ funcionario(id, id_departamento, nome, rua, bairro, telefone, telefone_fixo),
 departamento(id, nome, carga_horaria),
 
 peça(id, carro_designado, custo_unitario, quantidade)
+
+relacionamentos:
+
+cliente tem veiculo,
+
+funcionario faz reparação,
+
+reparação usa peça,
+
+funcionario pertence departamento,
+
+
+
