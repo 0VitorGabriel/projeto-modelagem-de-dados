@@ -1,16 +1,16 @@
 entidades:
 
-reparação(id, peças_utilizadas, preço_peça, tempo_gasto, preço_reparação, data), 
+reparação(id, id_funcionario, peças_utilizadas, preço_peça, tempo_gasto, preço_reparação, data), 
 
-reparação_veiculo(id_reparação, id_veiculo, id_funcionario), 
+reparação_veiculo(id_reparação, id_veiculo),
 
-reparação_peça(id_reparação, id_veiculo, id_peça, id_funcionario),
+reparação_peça(id_reparação, id_veiculo, id_peça), 
 
-cliente(id, nome, rua, bairro, telefone, telefone_fixo), 
+cliente(id, nome, sobrenome, rua, bairro, telefone, telefone_fixo), 
 
-veiculo(id_cliente, nome, marca, data_aquisição, ativo), 
+veiculo(id_cliente, modelo, marca, data_aquisição, ativo), 
 
-funcionario(id, id_departamento, nome, rua, bairro, telefone, telefone_fixo), 
+funcionario(id, id_departamento, nome, sobrenome, rua, bairro, telefone, telefone_fixo), 
 
 departamento(id, nome, carga_horaria),
 
