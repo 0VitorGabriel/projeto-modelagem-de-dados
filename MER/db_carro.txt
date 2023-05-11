@@ -28,5 +28,4 @@ reparação feita funcionario,
 
 funcionario pertence departamento.
 
-
-
+O MER não vai ser esse até o final do projeto, haverá mudanças no processo de normalização.
