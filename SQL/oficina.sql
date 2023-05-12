@@ -33,7 +33,7 @@ CREATE TABLE `cliente` (
   `numero_casa` int NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `numero_casa` (`numero_casa`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -42,6 +42,7 @@ CREATE TABLE `cliente` (
 
 LOCK TABLES `cliente` WRITE;
 /*!40000 ALTER TABLE `cliente` DISABLE KEYS */;
+INSERT INTO `cliente` VALUES (1,'Vitor','Gabriel','xxxxxxxxxxxxxxxx','xxxxxxxx',355);
 /*!40000 ALTER TABLE `cliente` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -58,7 +59,7 @@ CREATE TABLE `departamento` (
   `carga_horaria` varchar(255) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `nome` (`nome`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -67,6 +68,7 @@ CREATE TABLE `departamento` (
 
 LOCK TABLES `departamento` WRITE;
 /*!40000 ALTER TABLE `departamento` DISABLE KEYS */;
+INSERT INTO `departamento` VALUES (1,'xxxxxx','40 hrs');
 /*!40000 ALTER TABLE `departamento` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -79,7 +81,7 @@ DROP TABLE IF EXISTS `funcionario`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `funcionario` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `id_departamento` int DEFAULT NULL,
+  `id_departamento` int NOT NULL,
   `nome` varchar(255) NOT NULL,
   `sobrenome` varchar(255) NOT NULL,
   `rua` varchar(255) NOT NULL,
@@ -89,7 +91,7 @@ CREATE TABLE `funcionario` (
   UNIQUE KEY `numero_casa` (`numero_casa`),
   KEY `id_departamento` (`id_departamento`),
   CONSTRAINT `funcionario_ibfk_1` FOREIGN KEY (`id_departamento`) REFERENCES `departamento` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -98,6 +100,7 @@ CREATE TABLE `funcionario` (
 
 LOCK TABLES `funcionario` WRITE;
 /*!40000 ALTER TABLE `funcionario` DISABLE KEYS */;
+INSERT INTO `funcionario` VALUES (3,1,'Guilherme','Reis','xxxxxxxxxxxx','xxxxxx',0);
 /*!40000 ALTER TABLE `funcionario` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -115,7 +118,7 @@ CREATE TABLE `peca` (
   `veiculo_designado` varchar(255) NOT NULL,
   `quantidade` int NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -124,6 +127,7 @@ CREATE TABLE `peca` (
 
 LOCK TABLES `peca` WRITE;
 /*!40000 ALTER TABLE `peca` DISABLE KEYS */;
+INSERT INTO `peca` VALUES (1,'xxxxxx','R$ 0000,00','xxxxxxx',5000);
 /*!40000 ALTER TABLE `peca` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -138,9 +142,9 @@ CREATE TABLE `reparacao` (
   `id` int NOT NULL AUTO_INCREMENT,
   `preco_total_peca` varchar(255) NOT NULL,
   `preco_total` varchar(255) NOT NULL,
-  `data` date NOT NULL,
+  `data` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -149,6 +153,7 @@ CREATE TABLE `reparacao` (
 
 LOCK TABLES `reparacao` WRITE;
 /*!40000 ALTER TABLE `reparacao` DISABLE KEYS */;
+INSERT INTO `reparacao` VALUES (1,'R$ 000000, 00','R$ 000000, 00','0000-00-00');
 /*!40000 ALTER TABLE `reparacao` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -160,8 +165,8 @@ DROP TABLE IF EXISTS `reparacao_funcionario`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `reparacao_funcionario` (
-  `id_reparacao` int DEFAULT NULL,
-  `id_funcionario` int DEFAULT NULL,
+  `id_reparacao` int NOT NULL,
+  `id_funcionario` int NOT NULL,
   `pecas_utilizadas` int NOT NULL,
   `tempo_gasto` varchar(255) NOT NULL,
   KEY `id_reparacao` (`id_reparacao`),
@@ -177,6 +182,7 @@ CREATE TABLE `reparacao_funcionario` (
 
 LOCK TABLES `reparacao_funcionario` WRITE;
 /*!40000 ALTER TABLE `reparacao_funcionario` DISABLE KEYS */;
+INSERT INTO `reparacao_funcionario` VALUES (1,3,5,'5 hrs');
 /*!40000 ALTER TABLE `reparacao_funcionario` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -188,9 +194,9 @@ DROP TABLE IF EXISTS `reparacao_peca`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `reparacao_peca` (
-  `id_reparacao` int DEFAULT NULL,
-  `id_peca` int DEFAULT NULL,
-  `id_veiculo` int DEFAULT NULL,
+  `id_reparacao` int NOT NULL,
+  `id_peca` int NOT NULL,
+  `id_veiculo` int NOT NULL,
   KEY `id_reparacao` (`id_reparacao`),
   KEY `id_peca` (`id_peca`),
   KEY `id_veiculo` (`id_veiculo`),
@@ -206,6 +212,7 @@ CREATE TABLE `reparacao_peca` (
 
 LOCK TABLES `reparacao_peca` WRITE;
 /*!40000 ALTER TABLE `reparacao_peca` DISABLE KEYS */;
+INSERT INTO `reparacao_peca` VALUES (1,1,1);
 /*!40000 ALTER TABLE `reparacao_peca` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -217,8 +224,8 @@ DROP TABLE IF EXISTS `reparacao_veiculo`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `reparacao_veiculo` (
-  `id_reparacao` int DEFAULT NULL,
-  `id_veiculo` int DEFAULT NULL,
+  `id_reparacao` int NOT NULL,
+  `id_veiculo` int NOT NULL,
   KEY `id_reparacao` (`id_reparacao`),
   KEY `id_veiculo` (`id_veiculo`),
   CONSTRAINT `reparacao_veiculo_ibfk_1` FOREIGN KEY (`id_reparacao`) REFERENCES `reparacao` (`id`),
@@ -232,6 +239,7 @@ CREATE TABLE `reparacao_veiculo` (
 
 LOCK TABLES `reparacao_veiculo` WRITE;
 /*!40000 ALTER TABLE `reparacao_veiculo` DISABLE KEYS */;
+INSERT INTO `reparacao_veiculo` VALUES (1,1);
 /*!40000 ALTER TABLE `reparacao_veiculo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -243,7 +251,7 @@ DROP TABLE IF EXISTS `telefone_cliente`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `telefone_cliente` (
-  `id_cliente` int DEFAULT NULL,
+  `id_cliente` int NOT NULL,
   `telefone_residencial` varchar(255) DEFAULT NULL,
   `telefone_profissional` varchar(255) DEFAULT NULL,
   `telefone_pessoal` varchar(255) NOT NULL,
@@ -261,6 +269,7 @@ CREATE TABLE `telefone_cliente` (
 
 LOCK TABLES `telefone_cliente` WRITE;
 /*!40000 ALTER TABLE `telefone_cliente` DISABLE KEYS */;
+INSERT INTO `telefone_cliente` VALUES (1,'+55 (xx) xxxxx-xxxxx','+55 (xx) xxxxx-xxxxx','+55 (xx) xxxxx-xxxxxx');
 /*!40000 ALTER TABLE `telefone_cliente` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -272,7 +281,7 @@ DROP TABLE IF EXISTS `telefone_funcionario`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `telefone_funcionario` (
-  `id_funcionario` int DEFAULT NULL,
+  `id_funcionario` int NOT NULL,
   `telefone_residencial` varchar(255) DEFAULT NULL,
   `telefone_profissional` varchar(255) DEFAULT NULL,
   `telefone_pessoal` varchar(255) NOT NULL,
@@ -290,6 +299,7 @@ CREATE TABLE `telefone_funcionario` (
 
 LOCK TABLES `telefone_funcionario` WRITE;
 /*!40000 ALTER TABLE `telefone_funcionario` DISABLE KEYS */;
+INSERT INTO `telefone_funcionario` VALUES (3,'+55 (xx) xxxxx-xxxxx','+55 (xx) xxxxx-xxxxx','+55 (xx) xxxxxx-xxxxxx');
 /*!40000 ALTER TABLE `telefone_funcionario` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -302,15 +312,15 @@ DROP TABLE IF EXISTS `veiculo`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `veiculo` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `id_cliente` int DEFAULT NULL,
+  `id_cliente` int NOT NULL,
   `modelo` varchar(255) NOT NULL,
   `marca` varchar(255) NOT NULL,
-  `data_aquisicao` date NOT NULL,
-  `ativo` tinyint(1) DEFAULT NULL,
+  `data_aquisicao` varchar(255) NOT NULL,
+  `ativo` int DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `id_cliente` (`id_cliente`),
   CONSTRAINT `veiculo_ibfk_1` FOREIGN KEY (`id_cliente`) REFERENCES `cliente` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -319,6 +329,7 @@ CREATE TABLE `veiculo` (
 
 LOCK TABLES `veiculo` WRITE;
 /*!40000 ALTER TABLE `veiculo` DISABLE KEYS */;
+INSERT INTO `veiculo` VALUES (1,1,'xxxx','xxxxxxxx','0000-00-00',1);
 /*!40000 ALTER TABLE `veiculo` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -331,4 +342,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-05-11 20:12:41
+-- Dump completed on 2023-05-12 18:38:33
